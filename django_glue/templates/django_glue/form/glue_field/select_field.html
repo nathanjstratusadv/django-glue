@@ -9,16 +9,16 @@
     >
     <div
         class="position-relative"
+        x-modelable="glue_field.exclude"
         x-data="{
             show_dropdown: false,
-            exclude: [],
 
-            init() {
-                this.exclude = [];
+            async init() {
+                this.glue_field.exclude = [];
             },
 
             get filtered_choices() {
-                return glue_field.choices.filter(choice => !this.exclude.includes(choice[0]));
+                return glue_field.choices.filter(choice => !this.glue_field.exclude.includes(choice[0]));
             },
 
             get choice_verbose() {
