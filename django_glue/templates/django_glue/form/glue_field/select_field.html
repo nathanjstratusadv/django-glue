@@ -2,20 +2,30 @@
 
 {% block field_content %}
     <input
-            type="text"
-            x-model="value"
-            x-ref="glue_field"
-            hidden
-    > 
+        type="text"
+        x-model="value"
+        x-ref="glue_field"
+        hidden
+    >
     <div
         class="position-relative"
         x-data="{
             show_dropdown: false,
+            exclude: [],
+
+            init() {
+                this.exclude = [];
+            },
+
+            get filtered_choices() {
+                return glue_field.choices.filter(choice => !this.exclude.includes(choice[0]));
+            },
+
             get choice_verbose() {
-                if (!glue_field.choices.some(choice => choice[0] === this.value)) {
+                if (!this.filtered_choices.some(choice => choice[0] === this.value)) {
                     return '------------';
                 } else {
-                    return glue_field.choices.find(
+                    return this.filtered_choices.find(
                         choice => choice[0] === this.value
                     )?.[1];
                 }
@@ -31,7 +41,6 @@
             <span class="d-flex align-items-center">
                 {% include 'django_glue/form/glue_field/element/select_down_arrow_element.html' %}
             </span>
-
         </button>
         <div
             x-cloak
@@ -45,7 +54,7 @@
             {% block select_dropdown_header %}
             {% endblock %}
 
-            <template x-for="(choice, index) in glue_field.choices" :key="choice[0]">
+            <template x-for="(choice, index) in filtered_choices" :key="choice[0]">
                 <div
                     class="glue-cursor-pointer py-1 d-flex align-items-center list-group-item px-0 bg-app-glue-layer-one-hover"
                     tabindex="0"
@@ -55,6 +64,7 @@
                     {% block choice_item %}
                         {% include 'django_glue/form/glue_field/item/select_choice_item.html' %}
                     {% endblock %}
+                </div>
             </template>
 
             {% block select_dropdown_footer %}

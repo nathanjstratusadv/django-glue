@@ -170,7 +170,14 @@ class ToChoicesGlueQuerySetHandler(GlueRequestHandler):
     @check_access
     def process_response_data(self) -> GlueJsonResponseData:
         glue_query_set = glue_query_set_from_session_data(self.session_data)
-        filtered_query_set = glue_query_set.query_set.filter(**self.post_data.filter_params)
+
+        exclude = self.post_data.filter_params.pop('exclude', [])
+
+        if exclude:
+            filtered_query_set = glue_query_set.query_set.exclude(id__in=exclude)
+        else:
+            filtered_query_set = glue_query_set.query_set.filter(**self.post_data.filter_params)
+
         glue_model_objects = glue_model_objects_from_query_set(filtered_query_set, self.session_data)
         choices = [(glue_model_obj.model_object.pk, str(glue_model_obj.model_object)) for glue_model_obj in glue_model_objects]
 
