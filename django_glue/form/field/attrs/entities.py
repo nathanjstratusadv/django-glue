@@ -1,11 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Union
 
 
 @dataclass
 class GlueFieldAttr:
     name: str
-    value: Union[str, int, bool, None] = None
+    value: str | int | bool | None = None
 
     def to_dict(self) -> dict:
         return {
@@ -24,7 +23,9 @@ class GlueFieldAttrs:
         elif isinstance(other, GlueFieldAttr):
             combined_attrs = self._merge_attrs([other])
         else:
-            raise TypeError(f'Unsupported type "{type(other)}"')
+            message = f'Unsupported type "{type(other)}"'
+            raise TypeError(message)
+
         return GlueFieldAttrs(attrs=combined_attrs)
 
     def _merge_attrs(self, new_attrs: list[GlueFieldAttr]) -> list[GlueFieldAttr]:

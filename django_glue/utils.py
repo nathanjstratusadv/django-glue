@@ -1,16 +1,12 @@
 import inspect
 import json
 import urllib.parse
-from typing import Optional, Callable, Union
 
 from django.core.serializers.json import DjangoJSONEncoder
 
 
-def check_valid_method_kwargs(method: Callable, kwargs: Optional[dict]):
-    for kwarg in kwargs:
-        if kwarg not in inspect.signature(method).parameters.keys():
-            return False
-    return True
+def check_valid_method_kwargs(method: callable, kwargs: dict | None):
+    return all(kwarg in inspect.signature(method).parameters for kwarg in kwargs)
 
 
 def encode_unique_name(request, unique_name):
@@ -22,11 +18,11 @@ def encode_unique_name(request, unique_name):
     return urllib.parse.quote(f'{unique_name}|{encode_path}', safe='')
 
 
-def serialize_to_json(data: Union[dict, tuple, list, str, int, float, ]) -> str:
+def serialize_to_json(data: dict | tuple | list | str | float) -> str:
     return json.dumps(data, cls=DjangoJSONEncoder)
 
 
-def type_set_method_kwargs(method: Callable, kwargs: Optional[dict]) -> dict:
+def type_set_method_kwargs(method: callable, kwargs: dict | None) -> dict:
     type_set_kwargs = {}
 
     # This is a dict consisting of all kwargs and there type annotations (If they have type annotations)

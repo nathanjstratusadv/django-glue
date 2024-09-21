@@ -2,7 +2,7 @@ import unittest
 
 
 class TestCore(unittest.TestCase):
-    def test_everything(self):
+    def test_everything(self) -> None:
         try:
             self.assertTrue(True)
         except:

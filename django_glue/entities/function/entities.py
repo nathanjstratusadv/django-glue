@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django_glue.access.access import GlueAccess
 from django_glue.entities.base_entity import GlueEntity
 from django_glue.entities.function.response_data import GlueFunctionJsonData

@@ -1,5 +1,3 @@
-from typing import Optional
-
 from django_glue.form.field.attrs.entities import GlueFieldAttrs
 from django_glue.form.field.entities import GlueFormField
 from django_glue.form.field.attrs.builder import glue_field_attr_from_model_field
@@ -15,14 +13,14 @@ class GlueFormFieldFactory:
     def choices(self) -> list:
         if self.model_field.choices:
             if self.model_field.blank:
-                return [(False, '----------')] + self.model_field.choices
-            else:
-                return self.model_field.choices
-        else:
-            if self.model_field.get_internal_type() == 'BooleanField':
-                return [(True, 'Yes'), (False, 'No')]
-            else:
-                return [(False, '----------')]
+                return [(False, '----------'), *self.model_field.choices]
+
+            return self.model_field.choices
+
+        if self.model_field.get_internal_type() == 'BooleanField':
+            return [(True, 'Yes'), (False, 'No')]
+
+        return [(False, '----------')]
 
     def factory_method(self):
         return GlueFormField(
@@ -37,11 +35,11 @@ class GlueFormFieldFactory:
     def help_text(self) -> str:
         if self.model_field.hidden or not self.model_field.help_text:
             return ''
-        else:
-            return str(self.model_field.help_text) if self.model_field.help_text else None
 
-    def label(self) -> Optional[str]:
+        return str(self.model_field.help_text) if self.model_field.help_text else None
+
+    def label(self) -> str | None:
         if self.model_field.hidden:
             return None
-        else:
-            return str(self.model_field.verbose_name).title()
+
+        return str(self.model_field.verbose_name).title()

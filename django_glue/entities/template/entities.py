@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.template.loader import render_to_string
 
 from django_glue.access.access import GlueAccess
@@ -10,9 +9,9 @@ from django_glue.handler.enums import GlueConnection
 
 class GlueTemplate(GlueEntity):
     def __init__(
-            self,
-            unique_name: str,
-            template_name: str,
+        self,
+        unique_name: str,
+        template_name: str,
     ):
         super().__init__(unique_name, GlueConnection.TEMPLATE, GlueAccess.VIEW)
         self.template_name = template_name

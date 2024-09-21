@@ -6,7 +6,9 @@ from django_glue.entities.model_object.session_data import GlueModelObjectSessio
 from django_glue.entities.query_set.session_data import GlueQuerySetSessionData
 
 
-def glue_model_object_from_glue_session(glue_session: GlueModelObjectSessionData) -> GlueModelObject:
+def glue_model_object_from_glue_session(
+    glue_session: GlueModelObjectSessionData
+) -> GlueModelObject:
     model = apps.get_model(glue_session.app_label, glue_session.model_name)
 
     try:
@@ -25,8 +27,8 @@ def glue_model_object_from_glue_session(glue_session: GlueModelObjectSessionData
 
 
 def glue_model_object_from_glue_query_set_session(
-        model_object: Model,
-        query_set_session_data: GlueQuerySetSessionData
+    model_object: Model,
+    query_set_session_data: GlueQuerySetSessionData
 ):
     return GlueModelObject(
         unique_name=query_set_session_data.unique_name,
@@ -39,8 +41,8 @@ def glue_model_object_from_glue_query_set_session(
 
 
 def glue_model_objects_from_query_set(
-        query_set: QuerySet,
-        query_set_session_data: GlueQuerySetSessionData
+    query_set: QuerySet,
+    query_set_session_data: GlueQuerySetSessionData
 ) -> list[GlueModelObject]:
 
     return [glue_model_object_from_glue_query_set_session(

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django_glue.response.responses import generate_json_404_response_data
 
 

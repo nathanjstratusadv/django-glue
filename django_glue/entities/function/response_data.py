@@ -8,5 +8,5 @@ from django_glue.response.data import GlueJsonData
 class GlueFunctionJsonData(GlueJsonData):
     function_return: Any
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         return {'function_return': self.function_return}

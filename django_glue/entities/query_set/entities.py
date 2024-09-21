@@ -1,6 +1,5 @@
 import base64
 import pickle
-from typing import Union
 
 from django.db.models import QuerySet
 
@@ -16,7 +15,7 @@ class GlueQuerySet(GlueEntity):
             self,
             unique_name: str,
             query_set: QuerySet,
-            access: Union[GlueAccess, str] = GlueAccess.VIEW,
+            access: GlueAccess | str = GlueAccess.VIEW,
             included_fields: tuple = ('__all__',),
             excluded_fields: tuple = ('__none__',),
             included_methods: tuple = ('__none__',),

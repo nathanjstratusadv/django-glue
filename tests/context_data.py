@@ -2,7 +2,7 @@ from django_glue.conf import settings
 
 
 def django_glue_context_data(request) -> dict:
-    context_data = {
+    return {
         'django_glue_session_data': request.session.get(
             settings.DJANGO_GLUE_SESSION_NAME,
             {}
@@ -13,5 +13,3 @@ def django_glue_context_data(request) -> dict:
         ),
 
     }
-
-    return context_data

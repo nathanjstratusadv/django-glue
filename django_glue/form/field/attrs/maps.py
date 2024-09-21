@@ -8,7 +8,8 @@ FIELD_TYPE_TO_GLUE_ATTR_FACTORY = {
     FieldType.SMALL_AUTO_FIELD: factories.GlueIntegerAttrFactory,
     FieldType.BOOLEAN: factories.GlueBooleanAttrFactory,
     FieldType.CHAR: factories.GlueCharAttrFactory,
-    FieldType.COMMA_SEPARATED_INTEGER: factories.GlueIntegerAttrFactory,  # Now depreciated in django.
+    # Now depreciated in Django.
+    FieldType.COMMA_SEPARATED_INTEGER: factories.GlueIntegerAttrFactory,
     FieldType.DATE: factories.GlueDateAttrFactory,
     FieldType.DATETIME: factories.GlueDateAttrFactory,
     FieldType.DECIMAL: factories.GlueDecimalAttrFactory,
@@ -24,7 +25,8 @@ FIELD_TYPE_TO_GLUE_ATTR_FACTORY = {
     FieldType.ONE_TO_ONE: factories.GlueIntegerAttrFactory,
     FieldType.MANY_TO_MANY: factories.GlueCharAttrFactory,
     FieldType.JSON: factories.GlueTextAreaAttrFactory,
-    FieldType.NULL_BOOLEAN: factories.GlueBooleanAttrFactory,  # Now depreciated in django
+    # Now depreciated in Django
+    FieldType.NULL_BOOLEAN: factories.GlueBooleanAttrFactory,
     FieldType.POSITIVE_BIG_INTEGER: factories.GlueIntegerAttrFactory,
     FieldType.POSITIVE_INTEGER: factories.GlueIntegerAttrFactory,
     FieldType.POSITIVE_SMALL_INTEGER: factories.GlueIntegerAttrFactory,

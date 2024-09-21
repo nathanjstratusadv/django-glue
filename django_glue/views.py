@@ -20,8 +20,8 @@ def glue_data_ajax_handler_view(request):
     if glue_body_data.unique_name in glue_session.session:
         logging.warning(request.body.decode('utf-8'))
         return process_glue_request(glue_session, glue_body_data).to_django_json_response()
-    else:
-        return generate_json_404_response()
+
+    return generate_json_404_response()
 
 
 def glue_keep_live_handler_view(request):

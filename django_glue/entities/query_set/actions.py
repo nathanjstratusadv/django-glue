@@ -15,9 +15,12 @@ class GlueQuerySetAction(GlueAction):
     def required_access(self) -> GlueAccess:
         if self.value in ['get', 'all', 'filter', 'null_object', 'to_choices']:
             return GlueAccess.VIEW
-        elif self.value in ['update', 'method']:
+
+        if self.value in ['update', 'method']:
             return GlueAccess.CHANGE
-        elif self.value == 'delete':
+
+        if self.value == 'delete':
             return GlueAccess.DELETE
-        else:
-            raise ValueError('That is not a valid action on a glue query set.')
+
+        message = 'That is not a valid action on a glue query set.'
+        raise ValueError(message)

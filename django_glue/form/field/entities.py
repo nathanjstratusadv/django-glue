@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from typing import Optional
 
 from django_glue.form.field.attrs.entities import GlueFieldAttrs
 
@@ -9,10 +8,10 @@ class GlueFormField:
     name: str
     type: str
     attrs: GlueFieldAttrs
-    label: Optional[str] = None
-    id: Optional[str] = None
+    label: str | None = None
+    id: str | None = None
     help_text: str = ''
-    choices: Optional[list] = field(default_factory=list)
+    choices: list | None = field(default_factory=list)
 
     def __post_init__(self):
         if self.id is None:

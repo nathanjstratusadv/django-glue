@@ -6,7 +6,8 @@ from django_glue.response.data import GlueJsonData
 
 
 @dataclass
-class GlueModelObjectJsonData(GlueJsonData):  # This is a little duplicated but allows us to send more response data.
+class GlueModelObjectJsonData(GlueJsonData):
+    # This is a little duplicated but allows us to send more response data.
     fields: GlueModelFields
 
     def to_dict(self):

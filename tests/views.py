@@ -36,7 +36,6 @@ class ModelObjectView(TemplateView):
         # glue_model(self.request, 'test_model_4', test_model_object, 'change', exclude=('birth_date', 'anniversary_datetime'))
 
         big_test_model_object = generate_big_test_model()
-
         return context_data
 
 

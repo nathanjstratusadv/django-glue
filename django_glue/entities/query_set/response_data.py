@@ -1,5 +1,4 @@
 from dataclasses import field, dataclass
-from typing import Union
 
 from django_glue.entities.model_object.response_data import GlueModelObjectJsonData, MethodGlueModelObjectJsonData
 from django_glue.response.data import GlueJsonData
@@ -23,7 +22,7 @@ class MethodGlueQuerySetJsonData(GlueJsonData):
 
 @dataclass
 class ToChoicesGlueQuerySetJsonData(GlueJsonData):
-    choices: list[Union[tuple, list]]
+    choices: list[tuple | list]
 
     def to_dict(self):
         return self.choices

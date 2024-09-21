@@ -1,15 +1,19 @@
-from typing import Union, Any
+from __future__ import annotations
 
-from django.db.models import Model
+from typing import Any, TYPE_CHECKING
 
 from django_glue.access.access import GlueAccess
 from django_glue.entities.base_entity import GlueEntity
-from django_glue.entities.model_object.fields.entities import GlueModelFields
 from django_glue.entities.model_object.fields.factories import model_object_fields_from_model
 from django_glue.entities.model_object.fields.utils import get_field_value_from_model_object
 from django_glue.entities.model_object.session_data import GlueModelObjectSessionData
 from django_glue.handler.enums import GlueConnection
 from django_glue.utils import check_valid_method_kwargs, type_set_method_kwargs
+
+if TYPE_CHECKING:
+    from django.db.models import Model
+
+    from django_glue.entities.model_object.fields.entities import GlueModelFields
 
 
 class GlueModelObject(GlueEntity):
@@ -17,7 +21,7 @@ class GlueModelObject(GlueEntity):
             self,
             unique_name: str,
             model_object: Model,
-            access: Union[GlueAccess, str] = GlueAccess.VIEW,
+            access: GlueAccess | str = GlueAccess.VIEW,
             included_fields: tuple = ('__all__',),
             excluded_fields: tuple = ('__none__',),
             included_methods: tuple = ('__none__',),
@@ -59,7 +63,7 @@ class GlueModelObject(GlueEntity):
         return glue_model_fields
 
     def generate_method_data(self):
-        methods_list = list()
+        methods_list = []
 
         for method in self.included_methods:
             if hasattr(self.model_object, method):
@@ -67,7 +71,8 @@ class GlueModelObject(GlueEntity):
             elif method == '__none__':
                 pass
             else:
-                raise KeyError(f'Method "{method}" is invalid for model type "{self.model.__class__.__name__}"')
+                message = f'Method "{method}" is invalid for model type "{self.model.__class__.__name__}"'
+                raise KeyError(message)
 
         return methods_list
 

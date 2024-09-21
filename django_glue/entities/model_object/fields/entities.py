@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any, Union
+from typing import Any
 
 from django_glue.entities.model_object.fields.seralizers import serialize_field_value
 from django_glue.form.field.entities import GlueFormField
@@ -23,7 +23,7 @@ class GlueModelFieldMeta:
 class GlueModelField:
     name: str
     value: Any
-    _meta: Union[GlueModelFieldMeta, dict] = field(default_factory=dict)
+    _meta: GlueModelFieldMeta | dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -40,5 +40,5 @@ class GlueModelFields:
     def __iter__(self):
         return self.fields.__iter__()
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         return {field.name: field.to_dict() for field in self.fields}

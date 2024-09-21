@@ -4,7 +4,7 @@ import sys
 from settings import BASE_DIR
 
 
-def main():
+def main() -> None:
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tests.settings')
     sys.path.append(BASE_DIR)
 
@@ -16,6 +16,7 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+
     execute_from_command_line(sys.argv)
 
 

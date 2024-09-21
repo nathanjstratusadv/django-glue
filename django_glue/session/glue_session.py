@@ -3,7 +3,6 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 
 from django_glue.conf import settings
-
 from django_glue.session.data import GlueSessionData
 from django_glue.session.session import Session
 

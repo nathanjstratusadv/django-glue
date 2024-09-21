@@ -8,5 +8,6 @@ class GlueTemplateAction(GlueAction):
     def required_access(self) -> GlueAccess:
         if self.value == 'get':
             return GlueAccess.VIEW
-        else:
-            raise ValueError('That is not a valid action on a glue query set.')
+
+        message = 'That is not a valid action on a glue query set.'
+        raise ValueError(message)

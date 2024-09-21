@@ -1,5 +1,3 @@
-from typing import Union
-
 from django.db.models import Model
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
@@ -41,9 +39,9 @@ def glue_model(
         unique_name: str,
         target: Model,
         access: str = 'view',
-        fields: Union[list, tuple] = ('__all__',),
-        exclude: Union[list, tuple] = ('__none__',),
-        methods: Union[list, tuple] = ('__none__',),
+        fields: list | tuple = ('__all__',),
+        exclude: list | tuple = ('__none__',),
+        methods: list | tuple = ('__none__',),
 ):
     glue_model_object_entity = GlueModelObject(
         unique_name=encode_unique_name(request, unique_name),
@@ -62,9 +60,9 @@ def glue_query_set(
         unique_name: str,
         target: QuerySet,
         access: str = 'view',
-        fields: Union[list, tuple] = ('__all__',),
-        exclude: Union[list, tuple] = ('__none__',),
-        methods: Union[list, tuple] = ('__none__',),
+        fields: list | tuple = ('__all__',),
+        exclude: list | tuple = ('__none__',),
+        methods: list | tuple = ('__none__',),
 ):
     glue_query_set_entity = GlueQuerySet(
         unique_name=encode_unique_name(request, unique_name),

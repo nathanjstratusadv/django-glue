@@ -1,14 +1,16 @@
-from typing import Type
-
 from django.db.models import Model
 
-from django_glue.entities.model_object.fields.entities import GlueModelFields, GlueModelField, GlueModelFieldMeta
+from django_glue.entities.model_object.fields.entities import (
+    GlueModelFields,
+    GlueModelField,
+    GlueModelFieldMeta
+)
 from django_glue.entities.model_object.fields.utils import field_name_included
 from django_glue.form.field.factories import GlueFormFieldFactory
 
 
 def model_object_fields_from_model(
-        model: Type[Model],
+        model: type[Model],
         included_fields: tuple,
         excluded_fields: tuple
 ) -> GlueModelFields:

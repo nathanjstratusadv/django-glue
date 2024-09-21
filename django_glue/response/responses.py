@@ -1,5 +1,3 @@
-from typing import Optional
-
 from django.http import JsonResponse
 
 from django_glue.response.data import GlueJsonData, GlueJsonResponseData
@@ -9,8 +7,8 @@ from django_glue.response.enums import GlueJsonResponseStatus, GlueJsonResponseT
 def generate_json_200_response_data(
         message_title: str,
         message_body: str,
-        data: Optional[GlueJsonData] = None,
-        optional_message_data: Optional[dict] = None,
+        data: GlueJsonData | None = None,
+        optional_message_data: dict | None = None,
 ) -> GlueJsonResponseData:
 
     return GlueJsonResponseData(

@@ -11,9 +11,12 @@ class GlueModelObjectAction(GlueAction):
     def required_access(self) -> GlueAccess:
         if self.value in ['get', 'method']:
             return GlueAccess.VIEW
-        elif self.value in ['update']:
+
+        if self.value in ['update']:
             return GlueAccess.CHANGE
-        elif self.value == 'delete':
+
+        if self.value == 'delete':
             return GlueAccess.DELETE
-        else:
-            raise ValueError('That is not a valid action on a glue model object.')
+
+        message = 'That is not a valid action on a glue model object.'
+        raise ValueError(message)

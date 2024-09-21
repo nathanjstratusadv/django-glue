@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django_glue.access.decorators import check_access
 from django_glue.entities.function.actions import GlueFunctionAction
 from django_glue.entities.function.entities import GlueFunction
@@ -5,8 +7,12 @@ from django_glue.entities.function.post_data import CallGlueFunctionPostData
 
 from django_glue.entities.function.session_data import FunctionSessionData
 from django_glue.handler.handlers import GlueRequestHandler
-from django_glue.response.data import GlueJsonResponseData
 from django_glue.response.responses import generate_json_200_response_data
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from django_glue.response.data import GlueJsonResponseData
 
 
 class CallGlueFunctionHandler(GlueRequestHandler):
