@@ -15,6 +15,10 @@
 
             async init() {
                 this.glue_field.exclude = [];
+
+                $watch('glue_field.choices', async (_) => {
+                    this.value = this.filtered_choices.length > 0 ? this.filtered_choices[0][0] : '';
+                })
             },
 
             get filtered_choices() {
@@ -29,9 +33,6 @@
                 }
             },
         }"
-        x-effect="
-            value = filtered_choices.length > 0 ? filtered_choices[0][0] : '';
-        "
     >
         <button
             class="form-control text-start d-flex justify-content-between"
