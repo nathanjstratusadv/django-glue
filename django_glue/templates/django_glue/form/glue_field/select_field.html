@@ -18,19 +18,20 @@
             },
 
             get filtered_choices() {
-                return glue_field.choices.filter(choice => !this.glue_field.exclude.includes(choice[0]));
+                return this.glue_field.choices.filter(choice => !this.glue_field.exclude.includes(choice[0]));
             },
 
             get choice_verbose() {
                 if (!this.filtered_choices.some(choice => choice[0] === this.value)) {
                     return '------------';
                 } else {
-                    return this.filtered_choices.find(
-                        choice => choice[0] === this.value
-                    )?.[1];
+                    return this.filtered_choices.find(choice => choice[0] === this.value)?.[1];
                 }
             },
         }"
+        x-effect="
+            value = filtered_choices.length > 0 ? filtered_choices[0][0] : '';
+        "
     >
         <button
             class="form-control text-start d-flex justify-content-between"
@@ -42,6 +43,7 @@
                 {% include 'django_glue/form/glue_field/element/select_down_arrow_element.html' %}
             </span>
         </button>
+
         <div
             x-cloak
             x-show="show_dropdown"

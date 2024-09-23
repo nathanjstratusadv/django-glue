@@ -40,22 +40,25 @@ class GlueQuerySet {
         })
     }
 
-    async filter(filter_params) {
-        let model_object_list = []
+    async filter(filter_params = {}, exclude_params = {}) {
+        let model_object_list = [];
 
-        return await glue_ajax_request(this.glue_encoded_unique_name, 'filter', {'filter_params': filter_params})
-            .then((response) => {
-                let glue_query_set = JSON.parse(response.data)
-                glue_dispatch_response_event(response)
+        return await glue_ajax_request(this.glue_encoded_unique_name, 'filter', {
+            'filter_params': filter_params,
+            'exclude_params': exclude_params,
+        })
+        .then((response) => {
+            let glue_query_set = JSON.parse(response.data);
+            glue_dispatch_response_event(response);
 
-                for (let glue_field_data of glue_query_set) {
-                    let glue_fields = construct_glue_fields(glue_field_data)
-                    let model_object = new GlueModelObject(this.glue_unique_name, glue_fields)
-                    model_object_list.push(model_object)
-                }
+            for (let glue_field_data of glue_query_set) {
+                let glue_fields = construct_glue_fields(glue_field_data);
+                let model_object = new GlueModelObject(this.glue_unique_name, glue_fields);
+                model_object_list.push(model_object);
+            }
 
-                return model_object_list
-            })
+            return model_object_list;
+        });
     }
 
     async get(id) {
@@ -127,11 +130,14 @@ class GlueQuerySet {
         })
     }
 
-    async to_choices(filter_params= {}) {
-        return await glue_ajax_request(this.glue_encoded_unique_name, 'to_choices', {'filter_params': filter_params})
-            .then((response) => {
-                glue_dispatch_response_event(response)
-                return JSON.parse(response.data)
-            })
+    async to_choices(filter_params = {}, exclude_params = {}) {
+        return await glue_ajax_request(this.glue_encoded_unique_name, 'to_choices', {
+            'filter_params': filter_params,
+            'exclude_params': exclude_params
+        })
+        .then((response) => {
+            glue_dispatch_response_event(response)
+            return JSON.parse(response.data)
+        })
     }
 }
